@@ -1066,9 +1066,11 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3
             if (empty($fieldValue)) {
                 continue;
             }
-
-            if ($fieldName === 'id' || $this->isIdField($bean, $fieldName)){
-                $error = $this->validateId($fieldName, $fieldValue);
+            if ($fieldName === 'id' || self::isIdField($bean, $fieldName)){
+                $error = self::validateId($fieldName, $fieldValue);
+            //FATAL: Using $this when not in object context in  service/v3_1/SugarWebServiceImplv3_1.php:267, nusoap/nusoap.php(5437)
+            //if ($fieldName === 'id' || $this->isIdField($bean, $fieldName)){
+            //    $error = $this->validateId($fieldName, $fieldValue);
 
                 if (!empty($error)) {
                     $errors[] = $error;
