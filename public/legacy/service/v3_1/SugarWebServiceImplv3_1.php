@@ -264,7 +264,8 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3
         require_once($beanFiles[$class_name]);
         $seed = new $class_name();
 
-        $valid = $this->validateFields($name_value_list, $module_name);
+        //FATAL error Using $this when not in object context in  service/v3_1/SugarWebServiceImplv3_1.php:267, nusoap/nusoap.php(5437)
+        $valid = self::validateFields($name_value_list, $module_name);
         if ($valid === false) {
             $GLOBALS['log']->info('End: SugarWebServiceImpl->set_entry');
             return;
@@ -1067,8 +1068,9 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3
                 continue;
             }
 
-            if ($fieldName === 'id' || $this->isIdField($bean, $fieldName)){
-                $error = $this->validateId($fieldName, $fieldValue);
+            //FATAL error Using $this when not in object context in  service/v3_1/SugarWebServiceImplv3_1.php:267, nusoap/nusoap.php(5437)
+            if ($fieldName === 'id' || self::isIdField($bean, $fieldName)){
+                $error = self::validateId($fieldName, $fieldValue);
 
                 if (!empty($error)) {
                     $errors[] = $error;
